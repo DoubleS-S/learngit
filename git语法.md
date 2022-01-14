@@ -109,3 +109,20 @@
   - `dev`分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
   - bug分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；
   - feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。
+  
+- 多人协作的工作模式通常是这样：
+
+  1. 首先，可以试图用`git push origin <branch-name>`推送自己的修改；
+  2. 如果推送失败，则因为远程分支比你的本地更新，需要先用`git pull`试图合并；
+  3. 如果合并有冲突，则解决冲突，并在本地提交；
+  4. 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
+
+  如果`git pull`提示`no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to <branch-name> origin/<branch-name>`。
+
+- - 查看远程库信息，使用`git remote -v`；
+  - 本地新建的分支如果不推送到远程，对其他人就是不可见的；
+  - 从本地推送分支，使用`git push origin branch-name`，如果推送失败，先用`git pull`抓取远程的新提交；
+  - **在本地创建和远程分支对应的分支，使用`git checkout -b branch-name origin/branch-name`，本地和远程分支的名称最好一致；**
+  - 建立本地分支和远程分支的关联，使用`git branch --set-upstream branch-name origin/branch-name`；
+  - 从远程抓取分支，使用`git pull`，如果有冲突，要先处理冲突。
+
