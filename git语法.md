@@ -166,3 +166,45 @@ Fork---->Clone from my repository---->Code---->Push to my repository---->Pull re
   2.  local 和 upstream 要同步，就要设置上游（git remote add upstream <upstream地址>），之后 git pull upstream master 拉下来同步
   3. origin 和 upstream 要同步，可以选择去 github 操作，去 origin 仓库向 upstream 发起 pull request，但是 head 设置为 upstream，base 设置为 origin，这相当于反向 pull request，可以让你 fork 的仓库与原仓库保持同步
 
+### 八、自定义
+
+- - 忽略某些文件时，需要编写`.gitignore`；
+
+  - `.gitignore`文件本身要放到版本库里，并且可以对`.gitignore`做版本管理！
+
+  - `git check-ignore`命令检查
+
+  - 可以用`git add -f`强制添加ignore文件，可添加例外规则。
+
+  - ```
+    # 排除所有.开头的隐藏文件:
+    .*
+    # 排除所有.class文件:
+    *.class
+    
+    # 不排除.gitignore和App.class:
+    !.gitignore
+    !App.class
+    ```
+
+- ```
+  git config --global alias.<another name> <original name>
+  ```
+
+  设置别名，不加--global则不为全局设置，可在.git/config文件中找到，删除对应行可取消别名。
+
+  ```
+  $ git config --global alias.st status
+  $ git config --global alias.co checkout
+  $ git config --global alias.ci commit
+  $ git config --global alias.br branch
+  $ git config --global alias.unstage 'reset HEAD'
+  $ git config --global alias.last 'log -1'
+  git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  ```
+
+更多可查阅[git-cheat-sheet (gitee.io)](https://liaoxuefeng.gitee.io/resource.liaoxuefeng.com/git/git-cheat-sheet.pdf)
+
+**感谢廖雪峰老师！**
+
+入门git操作！
