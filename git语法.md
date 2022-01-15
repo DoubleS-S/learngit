@@ -1,4 +1,4 @@
-### 一
+### 一、创建本地库
 
 初始化一个Git仓库，使用`git init`命令。
 
@@ -7,7 +7,7 @@
 1. 使用命令`git add <file>`，注意，可反复多次使用，添加多个文件；
 2. 使用命令`git commit -m <message>`，完成。
 
-### 二
+### 二、状态管理
 
 - 要随时掌握工作区的状态，使用`git status`命令。
 - 如果`git status`告诉你有文件被修改过，用`git diff`可以查看修改内容。
@@ -15,7 +15,7 @@
 - `git diff --cached`：是查看index与repository的差别的。
 - `git diff HEAD`：是查看working tree和repository的差别的。其中：HEAD代表的是最近的一次commit的信息。
 
-### 三
+### 三、穿梭版本
 
 - `HEAD`指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令`git reset --hard commit_id`。
   - 若未关闭命令行，上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`，当然往上100个版本写100个`^`比较容易数不过来，所以写成`HEAD~100`。
@@ -31,7 +31,7 @@
 - 文件管理器删除 rm file，仅删除工作区文件，可`git checkout -- file`恢复至最新版本库。(新版：use "git restore <file>..." to discard changes in working directory)
 - 命令`git rm`用于删除版本库一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失**最近一次提交后你修改的内容**。
 
-### 四
+### 四、远程库
 
 - 要关联一个远程库，使用命令`git remote add origin git@server-name:path/repo-name.git`；
 
@@ -47,7 +47,7 @@
 
   Git支持多种协议，包括`https`，但`ssh`协议速度最快。
 
-### 五
+### 五、分支
 
 - Git鼓励大量使用分支：
 
@@ -129,3 +129,41 @@
 - rebase操作可以把本地未push的分叉提交历史整理成直线；
 
   rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
+
+### 六、标签
+
+- - 命令`git tag <tagname>`用于新建一个标签，默认为`HEAD`，也可以指定一个commit id；
+  - 命令`git tag -a <tagname> -m "blablabla..."`可以指定标签信息；
+  - 命令`git tag`可以查看所有标签。
+  - **注意：标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。**
+- - 创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
+  - 命令`git push origin <tagname>`可以推送一个本地标签；
+  - 命令`git push origin --tags`可以推送全部未推送过的本地标签；
+  - 命令`git tag -d <tagname>`可以删除一个本地标签；
+  - 命令`git push origin :refs/tags/<tagname>`可以删除一个远程标签。
+
+### 七、Github
+
+```ascii
+┌─ GitHub ────────────────────────────────────┐
+│                                             │
+│ ┌─────────────────┐     ┌─────────────────┐ │
+│ │ twbs/bootstrap  │────>│  my/bootstrap   │ │
+│ └─────────────────┘     └─────────────────┘ │
+│                                  ▲          │
+└──────────────────────────────────┼──────────┘
+                                   ▼
+                          ┌─────────────────┐
+                          │ local/bootstrap │
+                          └─────────────────┘
+```
+
+Fork---->Clone from my repository---->Code---->Push to my repository---->Pull request
+
+- 在GitHub上，可以任意Fork开源仓库；
+- 自己拥有Fork后的仓库的读写权限；
+- 可以推送pull request给官方仓库来贡献代码。
+- 有三个仓库，local（本地的），origin（远程你自己的） 和 upstream（远程别人的）。
+  1.  local 和 origin 要同步，就是采用之前讲的 git pull 和 git push；
+  2.  local 和 upstream 要同步，就要设置上游（git remote add upstream <upstream地址>），之后 git pull upstream master 拉下来同步
+  3. origin 和 upstream 要同步，可以选择去 github 操作，去 origin 仓库向 upstream 发起 pull request，但是 head 设置为 upstream，base 设置为 origin，这相当于反向 pull request，可以让你 fork 的仓库与原仓库保持同步
