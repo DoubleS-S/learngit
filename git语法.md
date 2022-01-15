@@ -126,9 +126,7 @@
   - 建立本地分支和远程分支的关联，使用`git branch --set-upstream branch-name origin/branch-name`；
   - 从远程抓取分支，使用`git pull`，如果有冲突，要先处理冲突。
 
-- rebase操作可以把本地未push的分叉提交历史整理成直线；
-
-  rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
+- rebase操作可以把本地未push的分叉提交历史整理成直线； rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
 
 ### 六、标签
 
@@ -167,3 +165,4 @@ Fork---->Clone from my repository---->Code---->Push to my repository---->Pull re
   1.  local 和 origin 要同步，就是采用之前讲的 git pull 和 git push；
   2.  local 和 upstream 要同步，就要设置上游（git remote add upstream <upstream地址>），之后 git pull upstream master 拉下来同步
   3. origin 和 upstream 要同步，可以选择去 github 操作，去 origin 仓库向 upstream 发起 pull request，但是 head 设置为 upstream，base 设置为 origin，这相当于反向 pull request，可以让你 fork 的仓库与原仓库保持同步
+
